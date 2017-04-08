@@ -6,6 +6,7 @@ import android.os.Bundle;
 import cn.zmh.animation.R;
 
 public class MainActivity extends AppCompatActivity {
+    private final static String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
