@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".activity.MainActivity">
 
     <TextView
@@ -12,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@color/head_background"
+        android:gravity="center"
         android:text="@string/head" />
 
     <TextView
@@ -19,5 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/body_background"
+        android:gravity="center"
         android:text="@string/body" />
 </cn.zmh.animation.view.StickLayout>

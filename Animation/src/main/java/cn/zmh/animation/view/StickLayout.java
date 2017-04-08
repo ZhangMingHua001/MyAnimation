@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 
+import java.net.InterfaceAddress;
+
 import cn.zmh.animation.R;
 import cn.zmh.animation.util.ZLog;
 
@@ -26,8 +28,11 @@ public class StickLayout extends LinearLayout {
     private float mTranslateMaxY;
     private int mPointerId;
 
+
     private VelocityTracker mVelocityTracker;
     private ValueAnimator animator;
+
+    private IStickLayout iStickLayout;
 
     public StickLayout(Context context) {
         super(context);
@@ -107,12 +112,22 @@ public class StickLayout extends LinearLayout {
     private void translateView(float translateY) {
         mTranslateY = translateY;
         mBody.setTranslationY(mTranslateY);
+        if (iStickLayout != null) {
+            iStickLayout.update(Math.abs(mTranslateY / (mTranslateMaxY - mTranslateMinY)));
+        }
     }
 
+    public void setIStickLayout(IStickLayout iStickLayout) {
+        this.iStickLayout = iStickLayout;
+    }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return super.onInterceptTouchEvent(ev);
+        if (iStickLayout != null) {
+            return iStickLayout.getIntercept();
+        } else {
+            return super.onInterceptTouchEvent(ev);
+        }
     }
 
 
@@ -147,10 +162,5 @@ public class StickLayout extends LinearLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mHeadHeight = mHead.getMeasuredHeight();
         setTranslateMax(mHeadHeight);
-    }
-
-    public int dip2px(float dpValue) {
-        final float scale = getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
     }
 }
