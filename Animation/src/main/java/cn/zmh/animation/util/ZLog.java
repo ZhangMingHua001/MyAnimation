@@ -12,13 +12,13 @@ public class ZLog {
 
     public static void d(String TAG, String msg) {
         if (IsDebug) {
-            Log.d(ZLog.TAG + TAG, msg);
+            Log.d(ZLog.TAG + TAG, msg + " Thread:" + Thread.currentThread());
         }
     }
 
     public static void e(String TAG, String msg) {
         if (IsDebug) {
-            Log.e(ZLog.TAG + TAG, msg);
+            Log.e(ZLog.TAG + TAG, msg + " Thread:" + Thread.currentThread());
         }
     }
 
